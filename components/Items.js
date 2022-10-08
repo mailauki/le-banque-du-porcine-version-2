@@ -3,10 +3,10 @@ import { supabase } from '../utils/supabaseClient';
 
 export default function Balances({ session }) {
   const [loading, setLoading] = useState(true)
-  const [balances, setBalances] = useState(null)
+  const [items, setItems] = useState(null)
 
   useEffect(() => {
-    getBalances()
+    getItems()
   }, [session])
 
   async function getCurrentUser() {
@@ -26,14 +26,14 @@ export default function Balances({ session }) {
     return session.user
   }
 
-  async function getBalances() {
+  async function getItems() {
     try {
       setLoading(true)
       const user = await getCurrentUser()
 
       let { data, error, status } = await supabase
-        .from('balances')
-        .select('name, amount')
+        .from('items')
+        .select('name, price')
         .eq('user_id', user.id)
 
       if (error && status !== 406) {
@@ -41,7 +41,7 @@ export default function Balances({ session }) {
       }
 
       if (data) {
-        setBalances(data)
+        setItems(data)
         console.log(data)
       }
     } catch (error) {
@@ -53,9 +53,9 @@ export default function Balances({ session }) {
 
   return (
     <div>
-      <h3>Balances</h3>
-      {balances ? (
-        balances.map((bal) => <p>{bal.name} - ${bal.amount.toFixed(2)}</p>)
+      <h3>Items</h3>
+      {items ? (
+        items.map((item) => <p>{item.name} - ${item.price.toFixed(2)}</p>)
       ) : (
         <></>
       )}

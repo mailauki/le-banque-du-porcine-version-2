@@ -5,6 +5,7 @@ import Auth from '../components/Auth';
 import Account from '../components/Account';
 import Navbar from '../components/Navbar';
 import Balances from '../components/Balances';
+import Items from '../components/Items';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -48,6 +49,7 @@ export default function Home() {
       {session ? (
         <div>
           <Balances key={session.user.id} session={session} />
+          <Items key={session.user.id} session={session} />
         </div>
       ) : (
         <></>
