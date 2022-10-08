@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from '../utils/supabaseClient';
+import styles from '../styles/Home.module.css'
 
 export default function Balances({ session }) {
   const [loading, setLoading] = useState(true)
@@ -42,7 +43,6 @@ export default function Balances({ session }) {
 
       if (data) {
         setBalances(data)
-        console.log(data)
       }
     } catch (error) {
       alert(error.message)
@@ -52,7 +52,7 @@ export default function Balances({ session }) {
   }
 
   return (
-    <div>
+    <div className={styles.box}>
       <h3>Balances</h3>
       {balances ? (
         balances.map((bal) => <p>{bal.name} - ${bal.amount.toFixed(2)}</p>)

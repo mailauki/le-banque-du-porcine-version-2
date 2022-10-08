@@ -39,13 +39,13 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Navbar />
-      <div>
+      {/* <div>
         {!session ? (
           <Auth />
         ) : (
           <Account key={session.user.id} session={session} />
         )}
-      </div>
+      </div> */}
       {session ? (
         <div>
           <Balances key={session.user.id} session={session} />

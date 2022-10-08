@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from '../utils/supabaseClient';
+import styles from '../styles/Home.module.css'
+import ItemEl from "./ItemEl";
 
 export default function Balances({ session }) {
   const [loading, setLoading] = useState(true)
@@ -33,7 +35,7 @@ export default function Balances({ session }) {
 
       let { data, error, status } = await supabase
         .from('items')
-        .select('name, price')
+        .select('name, price, image, priority')
         .eq('user_id', user.id)
 
       if (error && status !== 406) {
@@ -42,7 +44,6 @@ export default function Balances({ session }) {
 
       if (data) {
         setItems(data)
-        console.log(data)
       }
     } catch (error) {
       alert(error.message)
@@ -52,13 +53,15 @@ export default function Balances({ session }) {
   }
 
   return (
-    <div>
+    <div className={styles.column}>
       <h3>Items</h3>
-      {items ? (
-        items.map((item) => <p>{item.name} - ${item.price.toFixed(2)}</p>)
-      ) : (
-        <></>
-      )}
+      <div className={styles.grid}>
+        {items ? (
+          items.map((item) => <><ItemEl item={item} /><ItemEl item={item} /><ItemEl item={item} /></>)
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   )
 }
