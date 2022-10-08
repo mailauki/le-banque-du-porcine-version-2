@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { supabase } from '../utils/supabaseClient';
 import styles from '../styles/Home.module.css'
+import BalanceEl from "./BalanceEl";
+import { IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import ClearIcon from '@mui/icons-material/Clear';
 
 export default function Balances({ session }) {
   const [loading, setLoading] = useState(true)
@@ -53,9 +57,14 @@ export default function Balances({ session }) {
 
   return (
     <div className={styles.box}>
-      <h3>Balances</h3>
+      <div className={styles.row}>
+        <h3>Balances</h3>
+        <IconButton>
+          <AddIcon />
+        </IconButton>
+      </div>
       {balances ? (
-        balances.map((bal) => <p key={bal.id}>{bal.name} - ${bal.amount.toFixed(2)}</p>)
+        balances.map((balance) => <BalanceEl balance={balance} />)
       ) : (
         <></>
       )}

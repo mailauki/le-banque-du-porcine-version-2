@@ -58,7 +58,6 @@ export default function ItemForm({ item, onAdd, userId, defaultBalance }) {
 
   return (
     <div>
-      <h3>Form</h3>
       <form onSubmit={handleSubmit}>
         <div className={styles.input}>
           <label>Name</label>
