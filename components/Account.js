@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
+import styles from '../styles/Home.module.css'
 import { supabase } from '../utils/supabaseClient';
 import Avatar from './Avatar';
 
 export default function Account({ session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
-  const [website, setWebsite] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function Account({ session }) {
 
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url`)
+        .select('username, avatar_url')
         .eq('id', user.id)
         .single()
 
@@ -46,7 +46,6 @@ export default function Account({ session }) {
 
       if (data) {
         setUsername(data.username)
-        setWebsite(data.website)
         setAvatarUrl(data.avatar_url)
       }
     } catch (error) {
@@ -56,7 +55,7 @@ export default function Account({ session }) {
     }
   }
 
-  async function updateProfile({ username, website, avatar_url }) {
+  async function updateProfile({ username, avatar_url }) {
     try {
       setLoading(true)
       const user = await getCurrentUser()
@@ -64,7 +63,6 @@ export default function Account({ session }) {
       const updates = {
         id: user.id,
         username,
-        website,
         avatar_url,
         updated_at: new Date(),
       }
@@ -83,6 +81,7 @@ export default function Account({ session }) {
 
   return (
     <div className="form-widget">
+      <h1 className={styles.title}>Update Profile</h1>
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
@@ -94,15 +93,6 @@ export default function Account({ session }) {
           type="text"
           value={username || ''}
           onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          type="website"
-          value={website || ''}
-          onChange={(e) => setWebsite(e.target.value)}
         />
       </div>
       <Avatar
