@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css'
+import Image from 'next/image';
 import { supabase } from '../utils/supabaseClient';
 import Navbar from '../components/Navbar';
 
-export default function Account({ session }) {
+export default function Profile({ session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
@@ -90,12 +91,12 @@ export default function Account({ session }) {
             src={avatar_url}
             alt="Avatar"
             className="avatar image"
-            style={{ height: "150px", width: "150px" }}
+            style={{ height: "100px", width: "100px" }}
           />
         ) : (
           <div
             className="avatar no-image"
-            // style={{ height: size, width: size }}
+            style={{ height: "100px", width: "100px" }}
           />
         )}
       </div>
