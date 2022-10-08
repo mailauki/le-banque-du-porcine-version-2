@@ -67,12 +67,21 @@
 
 .column {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   max-width: 800px;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+ 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -141,6 +150,15 @@
 .shadow {
   box-shadow:  10px 10px 20px #b3b3b3,
               -10px -10px 20px #ffffff;
+}
+
+.button {
+  box-shadow:  3px 3px 6px #b3b3b3,
+              -3px -3px 6px #fff;
+}
+
+.button:hover {
+  background: linear-gradient(145deg, #cacaca, #f0f0f0);
 }
 
 @media (max-width: 600px) {

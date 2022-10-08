@@ -16,7 +16,7 @@ export default function ItemEl({ item }) {
       <p>{item.name} - ${item.price.toFixed(2)}</p>
       <div style={{ display: "flex", alignContent: "center" }}>
         <p>Priority: </p>
-        <p>{priorityIcons[item.priority]}</p>
+        <p style={{ marginLeft: "4px" }}>{priorityIcons[item.priority]}</p>
       </div>
     </div>
   )

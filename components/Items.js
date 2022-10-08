@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient';
 import styles from '../styles/Home.module.css'
-import ItemEl from "./ItemEl";
+import ItemEl from './ItemEl';
+import ItemForm from './ItemForm';
+import { IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import ClearIcon from '@mui/icons-material/Clear';
 
 export default function Balances({ session }) {
   const [loading, setLoading] = useState(true)
   const [items, setItems] = useState(null)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     getItems()
@@ -52,16 +57,35 @@ export default function Balances({ session }) {
     }
   }
 
+  function handleOpen() {
+    setOpen(!open)
+  }
+
   return (
     <div className={styles.column}>
-      <h3>Items</h3>
-      <div className={styles.grid}>
-        {items ? (
-          items.map((item) => <><ItemEl item={item} /><ItemEl item={item} /><ItemEl item={item} /></>)
+      <div className={styles.row}>
+        <h3>Items</h3>
+        {!open ? (
+          <IconButton className={styles.button} onClick={handleOpen}>
+            <AddIcon />
+          </IconButton>
         ) : (
-          <></>
+          <IconButton className={styles.button} onClick={handleOpen}>
+            <ClearIcon />
+          </IconButton>
         )}
       </div>
+      {!open ? (
+        <div className={styles.grid}>
+          {items ? (
+            items.map((item) => <><ItemEl item={item} /><ItemEl item={item} /><ItemEl item={item} /></>)
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
+        <ItemForm />
+      )}
     </div>
   )
 }
