@@ -7,13 +7,15 @@ import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
 
-export default function Balances({ session }) {
+export default function Items({ session }) {
   const [loading, setLoading] = useState(true)
   const [items, setItems] = useState(null)
+  const [defaultBalance, setDefaultBalance] = useState(null)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
     getItems()
+    getDefaultBalance()
   }, [session])
 
   async function getCurrentUser() {
@@ -57,8 +59,43 @@ export default function Balances({ session }) {
     }
   }
 
+  async function getDefaultBalance() {
+    try {
+      setLoading(true)
+      const user = await getCurrentUser()
+
+      let { data, error, status } = await supabase
+        .from('balances')
+        .select('id')
+        .eq('user_id', user.id)
+        .single()
+
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (data) {
+        setDefaultBalance(data)
+      }
+    } catch (error) {
+      alert(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   function handleOpen() {
     setOpen(!open)
+  }
+
+  async function handleAdd(formData) {
+    const { data, error } = await supabase
+    .from('items')
+    .insert([formData])
+
+    console.log(data, error)
+    console.log(formData)
+    setOpen(false)
   }
 
   return (
@@ -78,13 +115,13 @@ export default function Balances({ session }) {
       {!open ? (
         <div className={styles.grid}>
           {items ? (
-            items.map((item) => <><ItemEl item={item} /><ItemEl item={item} /><ItemEl item={item} /></>)
+            items.map((item) => <ItemEl item={item} />)
           ) : (
             <></>
           )}
         </div>
       ) : (
-        <ItemForm />
+        <ItemForm onAdd={handleAdd} userId={session.user.id} defaultBalance={defaultBalance} />
       )}
     </div>
   )

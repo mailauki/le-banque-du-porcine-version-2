@@ -11,7 +11,7 @@ export default function ItemEl({ item }) {
   }
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} key={item.id}>
       <img src={item.image} alt={item.name} />
       <p>{item.name} - ${item.price.toFixed(2)}</p>
       <div style={{ display: "flex", alignContent: "center" }}>

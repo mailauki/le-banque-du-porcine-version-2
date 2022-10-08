@@ -34,7 +34,7 @@ export default function Balances({ session }) {
 
       let { data, error, status } = await supabase
         .from('balances')
-        .select('name, amount')
+        .select('id, name, amount')
         .eq('user_id', user.id)
 
       if (error && status !== 406) {
@@ -55,7 +55,7 @@ export default function Balances({ session }) {
     <div className={styles.box}>
       <h3>Balances</h3>
       {balances ? (
-        balances.map((bal) => <p>{bal.name} - ${bal.amount.toFixed(2)}</p>)
+        balances.map((bal) => <p key={bal.id}>{bal.name} - ${bal.amount.toFixed(2)}</p>)
       ) : (
         <></>
       )}
