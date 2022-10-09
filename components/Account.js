@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import styles from '../styles/Home.module.css'
 import styles from '../styles/Form.module.css'
 import { supabase } from '../utils/supabaseClient';
 import Avatar from './Avatar';

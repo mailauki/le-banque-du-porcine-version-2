@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Form.module.css'
 import { supabase } from '../utils/supabaseClient';
 
 export default function Auth() {
@@ -20,35 +20,29 @@ export default function Auth() {
   }
 
   return (
-    <div className="row flex-center flex">
-      <div className="col-6 form-widget">
-        {/* <h1 className="header">Supabase + Next.js</h1> */}
-        <h1 className={styles.title}>Login</h1>
-        <p className={styles.description}>
-          Sign in via magic link with your email below
-        </p>
-        <div>
-          <input
-            className="inputField"
-            type="email"
-            placeholder="Your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <button
-            onClick={(e) => {
-              e.preventDefault()
-              handleLogin(email)
-            }}
-            className="button block"
-            disabled={loading}
-          >
-            <span>{loading ? 'Loading' : 'Send magic link'}</span>
-          </button>
-        </div>
+    <div className={styles.form}>
+      <h1 className={styles.title}>Login</h1>
+      <p className={styles.description}>
+        Sign in via magic link with your email below
+      </p>
+      <div className={styles.input}>
+        <input
+          type="email"
+          placeholder="Your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
+      <button
+        onClick={(e) => {
+          e.preventDefault()
+          handleLogin(email)
+        }}
+        className={styles.button}
+        disabled={loading}
+      >
+        <span>{loading ? 'Loading' : 'Send magic link'}</span>
+      </button>
     </div>
   )
 }

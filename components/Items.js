@@ -42,7 +42,7 @@ export default function Items({ session }) {
 
       let { data, error, status } = await supabase
         .from('items')
-        .select('name, price, image, priority')
+        .select('id, name, price, image, priority')
         .eq('user_id', user.id)
 
       if (error && status !== 406) {
@@ -113,7 +113,7 @@ export default function Items({ session }) {
       {!open ? (
         <div className={styles.grid}>
           {items ? (
-            items.map((item) => <ItemEl item={item} />)
+            items.map((item) => <ItemEl key={item.id} item={item} />)
           ) : (
             <></>
           )}

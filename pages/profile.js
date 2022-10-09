@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styles from '../styles/Home.module.css';
 import { supabase } from '../utils/supabaseClient';
 import Navbar from '../components/Navbar';
 import Auth from '../components/Auth';
@@ -33,13 +34,15 @@ export default function Profile() {
   }, [])
 
   return (
-    <div>
+    <div className={styles.container}>
       <Navbar />
-      {!session ? (
-        <Auth />
-      ) : (
-        <Account key={session.user.id} session={session} />
-      )}
+      <div className={styles.main}>
+        {!session ? (
+          <Auth />
+        ) : (
+          <Account key={session.user.id} session={session} />
+        )}
+      </div>
     </div>
   )
 }
