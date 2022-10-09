@@ -65,7 +65,7 @@ export default function Home() {
       <Navbar />
       {session ? (
         <div className={styles.main}>
-          <Balances session={session} />
+          <Balances session={session} id={id} />
           <Items session={session} />
         </div>
       ) : (
