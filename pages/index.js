@@ -19,15 +19,15 @@ export default function Home() {
   const dispatch = useDispatch()
   const id = currentUser ? currentUser.id : null
 
-  useEffect(() => {
-    dispatch(getCurrentUser())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getCurrentUser())
+  // }, [dispatch])
 
-  useEffect(() => {
-    if(id) {
-      dispatch(getProfile(id))
-    }
-  }, [id])
+  // useEffect(() => {
+  //   if(id) {
+  //     dispatch(getProfile(id))
+  //   }
+  // }, [id])
 
   useEffect(() => {
     let mounted = true
@@ -65,8 +65,8 @@ export default function Home() {
       <Navbar />
       {session ? (
         <div className={styles.main}>
-          <Balances session={session} id={id} />
-          <Items session={session} />
+          <Balances id={session.user.id} />
+          <Items id={session.user.id} />
         </div>
       ) : (
         <div className={styles.main}>

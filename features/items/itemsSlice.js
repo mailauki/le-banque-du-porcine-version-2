@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { supabase } from '../../utils/supabaseClient';
 
-export const getBalances = createAsyncThunk("balances/getBalances", async (id) => {
+export const getItems = createAsyncThunk("items/getItems", async (id) => {
   let { data, error, status } = await supabase
-  .from('balances')
-  .select('id, name, amount')
-  .eq('user_id', id)
+    .from('items')
+    .select('id, name, price, image, priority')
+    .eq('user_id', id)
 
   if (error && status !== 406) {
     throw error
@@ -16,8 +16,8 @@ export const getBalances = createAsyncThunk("balances/getBalances", async (id) =
   }
 })
 
-const balancesSlice = createSlice({
-  name: "balances",
+const itemsSlice = createSlice({
+  name: "items",
   initialState: {
     entities: null,
     status: "idle",
@@ -25,15 +25,15 @@ const balancesSlice = createSlice({
   reducers: {
   },
   extraReducers: {
-    [getBalances.pending](state) {
+    [getItems.pending](state) {
       state.status = "loading"
     },
-    [getBalances.fulfilled](state, action) {
+    [getItems.fulfilled](state, action) {
       state.status = "idle"
       state.entities = action.payload
-    },
+    }
   }
 })
 
-// export const {  } = balancesSlice.actions
-export default balancesSlice.reducer
+// export const {  } = itemsSlice.actions
+export default itemsSlice.reducer
