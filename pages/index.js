@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import styles from '../styles/Home.module.css'
+import { useState, useEffect } from 'react';
+import styles from '../styles/Home.module.css';
 import { supabase } from '../utils/supabaseClient';
 import Auth from '../components/Auth';
 import Account from '../components/Account';
@@ -39,13 +39,6 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Navbar />
-      {/* <div>
-        {!session ? (
-          <Auth />
-        ) : (
-          <Account key={session.user.id} session={session} />
-        )}
-      </div> */}
       {session ? (
         <div>
           <Balances key={session.user.id} session={session} />

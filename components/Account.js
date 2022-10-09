@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import styles from '../styles/Home.module.css'
+// import styles from '../styles/Home.module.css'
+import styles from '../styles/Form.module.css'
 import { supabase } from '../utils/supabaseClient';
 import Avatar from './Avatar';
 
@@ -80,13 +81,13 @@ export default function Account({ session }) {
   }
 
   return (
-    <div className="form-widget">
+    <div className={styles.form}>
       <h1 className={styles.title}>Update Profile</h1>
-      <div>
+      <div className={styles.input}>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session.user.email} disabled />
       </div>
-      <div>
+      <div className={styles.input}>
         <label htmlFor="username">Username</label>
         <input
           id="username"
@@ -103,25 +104,20 @@ export default function Account({ session }) {
           updateProfile({ username, website, avatar_url: url })
         }}
       />
+      <button
+        className={styles.button}
+        onClick={() => updateProfile({ username, website, avatar_url })}
+        disabled={loading}
+      >
+        {loading ? 'Loading ...' : 'Update'}
+      </button>
 
-      <div>
-        <button
-          className="button primary block"
-          onClick={() => updateProfile({ username, website, avatar_url })}
-          disabled={loading}
-        >
-          {loading ? 'Loading ...' : 'Update'}
-        </button>
-      </div>
-
-      <div>
-        <button
-          className="button block"
-          onClick={() => supabase.auth.signOut()}
-        >
-          Sign Out
-        </button>
-      </div>
+      <button
+        className={styles.button}
+        onClick={() => supabase.auth.signOut()}
+      >
+        Sign Out
+      </button>
     </div>
   )
 }
