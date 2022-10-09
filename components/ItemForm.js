@@ -1,12 +1,11 @@
 import { useState } from 'react';
-// import { supabase } from '../utils/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 import styles from '../styles/Form.module.css'
 import { TextField, Typography, Rating, Alert } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import LooksOneIcon from '@mui/icons-material/LooksOne';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
-import { supabase } from '../utils/supabaseClient';
 
 const StyledRating = styled(Rating)(({ theme }) => ({
   '& .MuiRating-iconEmpty .MuiSvgIcon-root': {

@@ -93,8 +93,6 @@ export default function Items({ session }) {
     .from('items')
     .insert([formData])
 
-    console.log(data, error)
-    console.log(formData)
     setOpen(false)
   }
 

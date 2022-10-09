@@ -3,7 +3,6 @@ import styles from '../styles/Home.module.css'
 export default function BalanceEl({ balance }) {
   return (
     <div 
-      key={balance.id} 
       className={styles.row} 
       style={{ alignItems: "baseline" }}
     >

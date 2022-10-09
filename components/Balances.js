@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from '../utils/supabaseClient';
 import styles from '../styles/Home.module.css'
 import BalanceEl from "./BalanceEl";
+import BalanceForm from "./BalanceForm";
 import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -9,6 +10,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 export default function Balances({ session }) {
   const [loading, setLoading] = useState(true)
   const [balances, setBalances] = useState(null)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     getBalances()
@@ -55,18 +57,40 @@ export default function Balances({ session }) {
     }
   }
 
+  function handleOpen() {
+    setOpen(!open)
+  }
+
+  async function handleAdd(formData) {
+    const { data, error } = await supabase
+    .from('balances')
+    .insert([formData])
+
+    setOpen(false)
+  }
+
   return (
     <div className={styles.box}>
       <div className={styles.row}>
         <h3>Balances</h3>
-        <IconButton>
-          <AddIcon />
-        </IconButton>
+        {!open ? (
+          <IconButton onClick={handleOpen}>
+            <AddIcon />
+          </IconButton>
+        ) : (
+          <IconButton onClick={handleOpen}>
+            <ClearIcon />
+          </IconButton>
+        )}
       </div>
-      {balances ? (
-        balances.map((balance) => <BalanceEl balance={balance} />)
+      {!open ? (
+        balances ? (
+          balances.map((balance) => <BalanceEl key={balance.id} balance={balance} />)
+        ) : (
+          <></>
+        )
       ) : (
-        <></>
+        <BalanceForm onAdd={handleAdd} userId={session.user.id} />
       )}
     </div>
   )
