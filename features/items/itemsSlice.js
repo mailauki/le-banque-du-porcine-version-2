@@ -4,7 +4,7 @@ import { supabase } from '../../utils/supabaseClient';
 export const getItems = createAsyncThunk("items/getItems", async (id) => {
   let { data, error, status } = await supabase
     .from('items')
-    .select('id, name, price, image, priority')
+    .select('id, name, price, image, priority, balances ( id, name, amount )')
     .eq('user_id', id)
 
   if (error && status !== 406) {
@@ -29,8 +29,11 @@ const itemsSlice = createSlice({
       state.status = "loading"
     },
     [getItems.fulfilled](state, action) {
+      const items = action.payload.map((item) => {
+        return {...item, percentage: Math.round(item.balances.amount / item.price * 100)}
+      })
       state.status = "idle"
-      state.entities = action.payload
+      state.entities = items
     }
   }
 })

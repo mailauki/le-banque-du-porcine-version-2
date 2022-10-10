@@ -34,13 +34,13 @@ export default function Profile() {
   }, [])
 
   return (
-    <div className={styles.container}>
+    <div>
       <Navbar />
-      <div className={styles.main}>
+      <div className={styles.container}>
         {!session ? (
           <Auth />
         ) : (
-          <Account key={session.user.id} session={session} />
+          <Account session={session} onLogot={setSession} />
         )}
       </div>
     </div>

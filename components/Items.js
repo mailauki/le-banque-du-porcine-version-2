@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import { supabase } from '../utils/supabaseClient';
 import { useSelector, useDispatch } from 'react-redux';
 import { getItems } from '../features/items/itemsSlice';
+import { getBalances } from '../features/balances/balancesSlice';
 import ItemEl from './ItemEl';
 import ItemForm from './ItemForm';
 import { IconButton } from '@mui/material';
@@ -12,14 +13,23 @@ import ClearIcon from '@mui/icons-material/Clear';
 export default function Items({ id }) {
   const [open, setOpen] = useState(false)
   const items = useSelector((state) => state.items.entities)
-  const defaultBalance = useSelector((state) => state.balances.entities[0])
+  // const defaultBalance = useSelector((state) => state.balances.entities[0])
+  const balances = useSelector((state) => state.balances.entities)
+  const [defaultBalance, setDefaultBalance] = useState(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if(id) {
       dispatch(getItems(id))
+      dispatch(getBalances(id))
     }
   }, [id])
+
+  useEffect(() => {
+    if(balances) {
+      setDefaultBalance(balances[0])
+    }
+  }, [balances])
 
   function handleOpen() {
     setOpen(!open)
@@ -35,7 +45,12 @@ export default function Items({ id }) {
 
   return (
     <div className={styles.column}>
-      <div className={styles.row}>
+      <div 
+        className={styles.row} 
+        style={{ 
+          padding: "1rem" 
+        }}
+      >
         <h3>Items</h3>
         {!open ? (
           <IconButton className={styles.button} onClick={handleOpen}>
@@ -56,7 +71,7 @@ export default function Items({ id }) {
           )}
         </div>
       ) : (
-        <ItemForm onAdd={handleAdd} userId={session.user.id} defaultBalance={defaultBalance} />
+        <ItemForm onAdd={handleAdd} userId={id} defaultBalance={defaultBalance} />
       )}
     </div>
   )

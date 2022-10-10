@@ -1,5 +1,7 @@
 .container {
+  min-height: 100vh;
   padding: 0 2rem;
+  margin: 4rem 0;
 }
 
 .main {
@@ -70,8 +72,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  max-width: 800px;
+  /* flex-wrap: wrap; */
+  flex: 1;
+  /* max-width: 800px; */
   /* width: 700px; */
 }
 
@@ -98,8 +101,8 @@
   /* border: 1px solid #eaeaea; */
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
-  max-height: 300px;
+  /* max-width: 300px;
+  max-height: 300px; */
   box-shadow:  10px 10px 20px #b3b3b3,
               -10px -10px 20px #ffffff;
 }
@@ -108,7 +111,6 @@
 .card:focus,
 .card:active {
   color: #0070f3;
-  border-color: #0070f3;
 }
 
 .card h2 {
@@ -135,8 +137,8 @@
 }
 
 .box {
-  width: 80vw;
-  max-width: 800px;
+  /* width: 80vw;
+  max-width: 800px; */
   border-radius: 20px;
   /* margin: 20px auto 30px auto; */
   /* padding: 4px 20px; */
@@ -166,9 +168,10 @@
   background: linear-gradient(145deg, #cacaca, #f0f0f0);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .grid {
     width: 100%;
+    display: flex;
     flex-direction: column;
   }
 }

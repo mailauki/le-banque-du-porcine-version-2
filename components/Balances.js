@@ -9,7 +9,7 @@ import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
 
-export default function Balances({ session, id }) {
+export default function Balances({ id }) {
   const [open, setOpen] = useState(false)
   const balances = useSelector((state) => state.balances.entities)
   const dispatch = useDispatch()
@@ -53,7 +53,7 @@ export default function Balances({ session, id }) {
           <></>
         )
       ) : (
-        <BalanceForm onAdd={handleAdd} userId={session.user.id} />
+        <BalanceForm onAdd={handleAdd} userId={id} />
       )}
     </div>
   )

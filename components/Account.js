@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import styles from '../styles/Form.module.css'
 import { supabase } from '../utils/supabaseClient';
 import Avatar from './Avatar';
+import { useRouter } from 'next/router';
 
-export default function Account({ session }) {
+export default function Account({ session, onLogout }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
+  const router = useRouter()
 
   useEffect(() => {
     getProfile()
@@ -79,6 +81,13 @@ export default function Account({ session }) {
     }
   }
 
+  function handleLogout() {
+    supabase.auth.signOut()
+
+    onLogout(null)
+    // router.push("/")
+  }
+
   return (
     <div className={styles.form}>
       <h1 className={styles.title}>Update Profile</h1>
@@ -113,7 +122,7 @@ export default function Account({ session }) {
 
       <button
         className={styles.button}
-        onClick={() => supabase.auth.signOut()}
+        onClick={handleLogout}
       >
         Sign Out
       </button>

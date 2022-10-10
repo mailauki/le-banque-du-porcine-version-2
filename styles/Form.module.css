@@ -1,18 +1,31 @@
 .form {
   width: 100%;
+  /* width: 80vw;
+  max-width: 800px; */
   /* margin: 0 auto; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  /* text-align: center; */
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow:  10px 10px 20px #b3b3b3,
+              -10px -10px 20px #ffffff;
 }
 
-.input{
+.form form {
+  width: 100%;
+}
+
+.input {
   display: flex;
   flex-direction: column;
   margin: 10px auto;
   width: 80%;
+  /* width: 80vw;
+  min-width: 300px;
+  max-width: 800px; */
 }
 
 .input input, .button {

@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 import Balances from '../components/Balances';
 import Items from '../components/Items';
 import { Fab } from '@mui/material';
+import LoginIcon from '@mui/icons-material/Login';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -61,20 +62,23 @@ export default function Home() {
   }
 
   return (
-    <div className={styles.container}>
+    // <div className={styles.container}>
+    <div>
       <Navbar />
       {session ? (
-        <div className={styles.main}>
+        <div className={styles.container}>
+        {/* <div> */}
           <Balances id={session.user.id} />
           <Items id={session.user.id} />
         </div>
       ) : (
-        <div className={styles.main}>
+        <div className={styles.container}>
           <Fab 
             onClick={handleClick} 
             variant="extended" 
             color="primary" 
           >
+            <LoginIcon sx={{ mr: 1 }} />
             Login
           </Fab>
         </div>
