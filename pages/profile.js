@@ -40,7 +40,7 @@ export default function Profile() {
         {!session ? (
           <Auth />
         ) : (
-          <Account session={session} onLogot={setSession} />
+          <Account session={session} onLogout={setSession} />
         )}
       </div>
     </div>

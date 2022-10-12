@@ -10,7 +10,7 @@ import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
 
-export default function Items({ id }) {
+export default function Items({ userId }) {
   const [open, setOpen] = useState(false)
   const items = useSelector((state) => state.items.entities)
   // const defaultBalance = useSelector((state) => state.balances.entities[0])
@@ -19,11 +19,11 @@ export default function Items({ id }) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if(id) {
-      dispatch(getItems(id))
-      dispatch(getBalances(id))
+    if(userId) {
+      dispatch(getItems(userId))
+      dispatch(getBalances(userId))
     }
-  }, [id])
+  }, [userId])
 
   useEffect(() => {
     if(balances) {
@@ -71,7 +71,14 @@ export default function Items({ id }) {
           )}
         </div>
       ) : (
-        <ItemForm onAdd={handleAdd} userId={id} defaultBalance={defaultBalance} />
+        <div
+          className={styles.column}
+          style={{ 
+            padding: "1rem",
+          }}
+        >
+          <ItemForm onAdd={handleAdd} userId={userId} defaultBalance={defaultBalance} />
+        </div>
       )}
     </div>
   )

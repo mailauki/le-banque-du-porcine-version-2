@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from '../styles/Form.module.css'
 import { supabase } from '../utils/supabaseClient';
+import { TextField, Button } from '@mui/material';
 
 export default function Auth() {
   const [loading, setLoading] = useState(false)
@@ -25,15 +26,15 @@ export default function Auth() {
       <p className={styles.description}>
         Sign in via magic link with your email below
       </p>
-      <div className={styles.input}>
+      {/* <div className={styles.input}>
         <input
           type="email"
           placeholder="Your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-      </div>
-      <button
+      </div> */}
+      {/* <button
         onClick={(e) => {
           e.preventDefault()
           handleLogin(email)
@@ -42,7 +43,26 @@ export default function Auth() {
         disabled={loading}
       >
         <span>{loading ? 'Loading' : 'Send magic link'}</span>
-      </button>
+      </button> */}
+      <TextField 
+        id="email"
+        fullWidth
+        type="email"
+        label="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        margin="normal"
+      />
+      <Button
+        variant="contained"
+        fullWidth
+        onClick={(e) => {
+          e.preventDefault()
+          handleLogin(email)
+        }}
+        sx={{ margin: "16px 0 8px 0", padding: "12px" }}
+        disabled={loading}
+      >{loading ? 'Loading' : 'Send magic link'}</Button>
     </div>
   )
 }

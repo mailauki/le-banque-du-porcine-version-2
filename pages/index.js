@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getCurrentUser } from '../features/users/currentUserSlice';
 import { getProfile } from '../features/users/userProfileSlice';
 import Navbar from '../components/Navbar';
+import Auth from '../components/Auth';
+import Account from '../components/Account';
 import Balances from '../components/Balances';
 import Items from '../components/Items';
 import { Fab } from '@mui/material';
@@ -62,26 +64,40 @@ export default function Home() {
   }
 
   return (
-    // <div className={styles.container}>
     <div>
-      <Navbar />
+      <Navbar session={session} />
       {session ? (
         <div className={styles.container}>
-        {/* <div> */}
-          <Balances id={session.user.id} />
-          <Items id={session.user.id} />
+          <div className={styles.main}>
+            <Balances userId={session.user.id} />
+            <Items userId={session.user.id} />
+          </div>
         </div>
       ) : (
+        // <div className={`${styles.container} ${styles.main}`}>
+        //   <div className={styles.main}><div className={styles.container}><Auth /></div></div>
+        //   <Fab 
+        //     onClick={handleClick} 
+        //     variant="extended" 
+        //     color="primary" 
+        //     sx={{ zIndex: 1 }}
+        //   >
+        //     <LoginIcon sx={{ mr: 1 }} />
+        //     Login
+        //   </Fab>
+        // </div>
         <div className={styles.container}>
-          <Fab 
-            onClick={handleClick} 
-            variant="extended" 
-            color="primary" 
-          >
-            <LoginIcon sx={{ mr: 1 }} />
-            Login
-          </Fab>
+          <div className={styles.main}>
+            <Auth />
+          </div>
         </div>
+        // <div className={styles.container}>
+        //   {!session ? (
+        //     <Auth />
+        //   ) : (
+        //     <Account session={session} onLogout={setSession} />
+        //   )}
+        // </div>
       )}
     </div>
   )

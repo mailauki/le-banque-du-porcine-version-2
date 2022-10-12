@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-import Navlink from './Navlink';
 import styles from '../styles/Home.module.css';
 import { Tabs, Tab, Typography, Box } from '@mui/material';
 
@@ -38,7 +36,7 @@ export default function Navbar() {
 
   return (
     <Box 
-      className={styles.row} 
+      className={`${styles.row} ${styles.navbar}`} 
       sx={{
         padding: "0 20px",
         borderBottom: 1,

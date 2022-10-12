@@ -9,16 +9,16 @@ import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
 
-export default function Balances({ id }) {
+export default function Balances({ userId }) {
   const [open, setOpen] = useState(false)
   const balances = useSelector((state) => state.balances.entities)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if(id) {
-      dispatch(getBalances(id))
+    if(userId) {
+      dispatch(getBalances(userId))
     }
-  }, [id])
+  }, [userId])
 
   function handleOpen() {
     setOpen(!open)
@@ -33,28 +33,35 @@ export default function Balances({ id }) {
   }
 
   return (
-    <div className={styles.box}>
-      <div className={styles.row}>
-        <h3>Balances</h3>
+    <div
+      className={styles.column}
+      style={{ 
+        padding: "1rem",
+      }}
+    >
+      <div className={styles.box}>
+        <div className={styles.row}>
+          <h3>Balances</h3>
+          {!open ? (
+            <IconButton onClick={handleOpen}>
+              <AddIcon />
+            </IconButton>
+          ) : (
+            <IconButton onClick={handleOpen}>
+              <ClearIcon />
+            </IconButton>
+          )}
+        </div>
         {!open ? (
-          <IconButton onClick={handleOpen}>
-            <AddIcon />
-          </IconButton>
+          balances ? (
+            balances.map((balance) => <BalanceEl key={balance.id} balance={balance} />)
+          ) : (
+            <></>
+          )
         ) : (
-          <IconButton onClick={handleOpen}>
-            <ClearIcon />
-          </IconButton>
+          <BalanceForm onAdd={handleAdd} userId={userId} />
         )}
       </div>
-      {!open ? (
-        balances ? (
-          balances.map((balance) => <BalanceEl key={balance.id} balance={balance} />)
-        ) : (
-          <></>
-        )
-      ) : (
-        <BalanceForm onAdd={handleAdd} userId={id} />
-      )}
     </div>
   )
 }
