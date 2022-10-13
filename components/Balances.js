@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css'
 import { supabase } from '../utils/supabaseClient';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBalances } from '../features/balances/balancesSlice';
-import BalanceEl from "./BalanceEl";
+import BalanceEl from './BalanceEl';
 import BalanceForm from "./BalanceForm";
 import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';

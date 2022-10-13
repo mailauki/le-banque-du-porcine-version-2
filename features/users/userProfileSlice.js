@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { supabase } from '../../utils/supabaseClient';
 
 export const getProfile = createAsyncThunk("users/getProfile", async (id) => {
-  let { data, error, status } = await supabase
-  .from('profiles')
-  .select('username, avatar_url')
-  .eq('id', id)
-  .single()
+  const { data, error, status } = await supabase
+    .from('profiles')
+    .select('username, avatar_url')
+    .eq('id', id)
+    .single()
 
   if (error && status !== 406) {
     throw error

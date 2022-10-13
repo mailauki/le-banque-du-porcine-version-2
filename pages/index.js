@@ -65,14 +65,16 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar session={session} />
       {session ? (
-        <div className={styles.container}>
-          <div className={styles.main}>
-            <Balances userId={session.user.id} />
-            <Items userId={session.user.id} />
+        <>
+          <Navbar userId={session.user.id} />
+          <div className={styles.container}>
+            <div className={styles.main}>
+              <Balances userId={session.user.id} />
+              <Items userId={session.user.id} />
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         // <div className={`${styles.container} ${styles.main}`}>
         //   <div className={styles.main}><div className={styles.container}><Auth /></div></div>
