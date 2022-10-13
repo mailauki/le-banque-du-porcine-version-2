@@ -35,14 +35,22 @@ export default function Profile() {
 
   return (
     <div>
-      <Navbar />
-      <div className={styles.container}>
-        {!session ? (
-          <Auth />
-        ) : (
-          <Account session={session} onLogout={setSession} />
-        )}
-      </div>
+      {session ? (
+        <>
+          <Navbar userId={session.user.id} onLogout={setSession} />
+          <div className={styles.container}>
+            <div className={styles.main}>
+              <Account session={session} />
+            </div>
+          </div>
+        </>
+      ) : (
+        <div className={styles.container}>
+          <div className={styles.main}>
+            <Auth />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

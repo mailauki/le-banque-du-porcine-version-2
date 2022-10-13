@@ -76,30 +76,11 @@ export default function Home() {
           </div>
         </>
       ) : (
-        // <div className={`${styles.container} ${styles.main}`}>
-        //   <div className={styles.main}><div className={styles.container}><Auth /></div></div>
-        //   <Fab 
-        //     onClick={handleClick} 
-        //     variant="extended" 
-        //     color="primary" 
-        //     sx={{ zIndex: 1 }}
-        //   >
-        //     <LoginIcon sx={{ mr: 1 }} />
-        //     Login
-        //   </Fab>
-        // </div>
         <div className={styles.container}>
           <div className={styles.main}>
             <Auth />
           </div>
         </div>
-        // <div className={styles.container}>
-        //   {!session ? (
-        //     <Auth />
-        //   ) : (
-        //     <Account session={session} onLogout={setSession} />
-        //   )}
-        // </div>
       )}
     </div>
   )

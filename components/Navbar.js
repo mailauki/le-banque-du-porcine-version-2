@@ -27,7 +27,7 @@ import { Tabs, Tab, Typography, Box, Avatar, Button, IconButton, Tooltip } from 
 //   )
 // }
 
-export default function Navbar({ userId }) {
+export default function Navbar({ userId, onLogout }) {
   const router = useRouter()
   const { route } = router
   // const [activeTab, setActiveTab] = useState(route) 
@@ -35,8 +35,6 @@ export default function Navbar({ userId }) {
   const [avatarUrl, setAvatarUrl] = useState(null)
   const profile = useSelector((state) => state.userProfile.entities)
   const dispatch = useDispatch()
-
-  console.log(route)
 
   useEffect(() => {
     if(userId) dispatch(getProfile(userId))
@@ -102,48 +100,33 @@ export default function Navbar({ userId }) {
       >
         Le Banque Du Porcine
       </Typography>
-      {/* <Tabs 
-        value={activeTab} 
-        onChange={handleChange} 
-        aria-label="navbar"
-      >
-        {links.map((link) => (
-          <LinkTab 
-            key={link.href} 
-            label={link.name} 
-            value={link.href}  
-            href={link.href} 
-          />
-        ))}
-      </Tabs> */}
-      {profile ? (
-        route === "/profile" ? (
-          <Button
-            variant="outlined"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
-        ) : (
-          <Tooltip title="Account settings" arrow>
-            <IconButton
-              onClick={(event) => {
-                event.preventDefault()
-        
-                router.push("/profile")
-              }}
-              size="small"
-            >
-              <Avatar 
-              src={avatarUrl} 
-              alt={profile.username.toUpperCase()}
-            />
-            </IconButton>
-          </Tooltip>
-        )
+      {route === "/profile" ? (
+        <Button
+          variant="outlined"
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
       ) : (
-        // <Avatar />
-        <></>
+        <Tooltip title="Account settings" arrow>
+          <IconButton
+            onClick={(event) => {
+              event.preventDefault()
+      
+              router.push("/profile")
+            }}
+            size="small"
+          >
+            {profile ? (
+              <Avatar 
+                src={avatarUrl} 
+                alt={profile.username}
+              />
+            ) : (
+              <Avatar />
+            )}
+          </IconButton>
+        </Tooltip>
       )}
     </Box>
   )
