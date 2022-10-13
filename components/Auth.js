@@ -22,28 +22,10 @@ export default function Auth() {
 
   return (
     <div className={styles.form}>
-      <h1 className={styles.title}>Login</h1>
-      <p className={styles.description}>
-        Sign in via magic link with your email below
+      <h1>Login</h1>
+      <p>
+        Sign in via magic link with your email below.
       </p>
-      {/* <div className={styles.input}>
-        <input
-          type="email"
-          placeholder="Your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div> */}
-      {/* <button
-        onClick={(e) => {
-          e.preventDefault()
-          handleLogin(email)
-        }}
-        className={styles.button}
-        disabled={loading}
-      >
-        <span>{loading ? 'Loading' : 'Send magic link'}</span>
-      </button> */}
       <TextField 
         id="email"
         fullWidth

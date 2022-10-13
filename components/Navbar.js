@@ -4,28 +4,7 @@ import styles from '../styles/Home.module.css';
 import { supabase } from '../utils/supabaseClient';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfile } from '../features/users/userProfileSlice';
-import { Tabs, Tab, Typography, Box, Avatar, Button, IconButton, Tooltip } from '@mui/material';
-
-// function LinkTab(props) {
-//   const router = useRouter()
-
-//   return (
-//     <Tab
-//       component="a"
-//       onClick={(event) => {
-//         event.preventDefault()
-
-//         router.push(props.href)
-//       }}
-//       sx={{
-//         "&:hover": {
-//           bgcolor: "action.hover",
-//         }
-//       }}
-//       {...props}
-//     />
-//   )
-// }
+import { Typography, Box, Avatar, Button, IconButton, Tooltip } from '@mui/material';
 
 export default function Navbar({ userId, onLogout }) {
   const router = useRouter()

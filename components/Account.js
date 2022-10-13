@@ -113,14 +113,14 @@ export default function Account({ session, onLogout }) {
         size={150}
         onUpload={(url) => {
           setAvatarUrl(url)
-          updateProfile({ username, website, avatar_url: url })
+          updateProfile({ username, avatar_url: url })
         }}
       />
       <Button
-        id="update"
+        // id="update"
         variant="contained"
         fullWidth
-        onClick={() => updateProfile({ username, website, avatar_url })}
+        onClick={() => updateProfile({ username, avatar_url })}
         disabled={loading}
         sx={{ margin: "16px 0 8px 0", padding: "12px" }}
       >
