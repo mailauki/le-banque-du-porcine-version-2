@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import { supabase } from '../utils/supabaseClient'
+import { useEffect, useState } from 'react';
+import { supabase } from '../utils/supabaseClient';
+import { Button } from '@mui/material';
 
 export default function Avatar({ url, size, onUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null)
@@ -68,17 +69,24 @@ export default function Avatar({ url, size, onUpload }) {
           style={{ height: size, width: size }}
         />
       )}
-      <div style={{ width: size }}>
-        <label className="button primary block" htmlFor="single">
+      <div style={{ width: size, textAlign: "center" }}>
+        {/* <label className="button primary block" htmlFor="avatar">
           {uploading ? 'Uploading ...' : 'Upload'}
-        </label>
+        </label> */}
+        <Button
+          component="label"
+          variant="outlined"
+          htmlFor="avatar"
+        >
+          {uploading ? 'Uploading ...' : 'Upload'}
+        </Button>
         <input
           style={{
             visibility: 'hidden',
             position: 'absolute',
           }}
           type="file"
-          id="single"
+          id="avatar"
           accept="image/*"
           onChange={uploadAvatar}
           disabled={uploading}

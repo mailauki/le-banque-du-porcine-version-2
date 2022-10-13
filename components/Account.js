@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import styles from '../styles/Form.module.css'
+import styles from '../styles/Form.module.css';
 import { supabase } from '../utils/supabaseClient';
 import Avatar from './Avatar';
 import { useRouter } from 'next/router';
+import { TextField, Button } from '@mui/material';
 
 export default function Account({ session, onLogout }) {
   const [loading, setLoading] = useState(true)
@@ -91,19 +92,22 @@ export default function Account({ session, onLogout }) {
   return (
     <div className={styles.form}>
       <h1 className={styles.title}>Update Profile</h1>
-      <div className={styles.input}>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
-      </div>
-      <div className={styles.input}>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
+      <TextField 
+        id="email"
+        fullWidth
+        label="Email"
+        defaultValue={session.user.email}
+        margin="normal"
+        disabled
+      />
+      <TextField 
+        id="username"
+        fullWidth
+        label="Username"
+        value={username || ""}
+        onChange={(e) => setUsername(e.target.value)}
+        margin="normal"
+      />
       <Avatar
         url={avatar_url}
         size={150}
@@ -112,20 +116,16 @@ export default function Account({ session, onLogout }) {
           updateProfile({ username, website, avatar_url: url })
         }}
       />
-      <button
-        className={styles.button}
+      <Button
+        id="update"
+        variant="contained"
+        fullWidth
         onClick={() => updateProfile({ username, website, avatar_url })}
         disabled={loading}
+        sx={{ margin: "16px 0 8px 0", padding: "12px" }}
       >
         {loading ? 'Loading ...' : 'Update'}
-      </button>
-
-      <button
-        className={styles.button}
-        onClick={handleLogout}
-      >
-        Sign Out
-      </button>
+      </Button>
     </div>
   )
 }

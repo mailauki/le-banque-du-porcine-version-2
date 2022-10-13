@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css';
 import { supabase } from '../utils/supabaseClient';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfile } from '../features/users/userProfileSlice';
-import { Tabs, Tab, Typography, Box, Avatar, IconButton, Tooltip } from '@mui/material';
+import { Tabs, Tab, Typography, Box, Avatar, Button, IconButton, Tooltip } from '@mui/material';
 
 // function LinkTab(props) {
 //   const router = useRouter()
@@ -36,6 +36,8 @@ export default function Navbar({ userId }) {
   const profile = useSelector((state) => state.userProfile.entities)
   const dispatch = useDispatch()
 
+  console.log(route)
+
   useEffect(() => {
     if(userId) dispatch(getProfile(userId))
   }, [userId])
@@ -61,6 +63,13 @@ export default function Navbar({ userId }) {
 
   function handleChange(event, newValue) {
     setActiveTab(newValue)
+  }
+
+  function handleLogout() {
+    supabase.auth.signOut()
+
+    onLogout(null)
+    // router.push("/")
   }
 
   return (
@@ -108,21 +117,30 @@ export default function Navbar({ userId }) {
         ))}
       </Tabs> */}
       {profile ? (
-        <Tooltip title="Account settings" arrow>
-          <IconButton
-            onClick={(event) => {
-              event.preventDefault()
-      
-              router.push("/profile")
-            }}
-            size="small"
+        route === "/profile" ? (
+          <Button
+            variant="outlined"
+            onClick={handleLogout}
           >
-            <Avatar 
-            src={avatarUrl} 
-            alt={profile.username.toUpperCase()}
-          />
-          </IconButton>
-        </Tooltip>
+            Logout
+          </Button>
+        ) : (
+          <Tooltip title="Account settings" arrow>
+            <IconButton
+              onClick={(event) => {
+                event.preventDefault()
+        
+                router.push("/profile")
+              }}
+              size="small"
+            >
+              <Avatar 
+              src={avatarUrl} 
+              alt={profile.username.toUpperCase()}
+            />
+            </IconButton>
+          </Tooltip>
+        )
       ) : (
         // <Avatar />
         <></>
