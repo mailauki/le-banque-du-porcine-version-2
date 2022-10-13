@@ -6,7 +6,7 @@ import Looks3Icon from '@mui/icons-material/Looks3';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function ItemEl({ item, onEdit }) {
+export default function ItemEl({ item, onEdit, onDelete }) {
   const priorityIcons = {
     1: <LooksOneIcon color="error" />,
     2: <LooksTwoIcon color="warning" />,
@@ -25,7 +25,7 @@ export default function ItemEl({ item, onEdit }) {
         <IconButton onClick={() => onEdit(item)}>
           <EditIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => onDelete(item)}>
           <DeleteIcon />
         </IconButton>
       </div>

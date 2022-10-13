@@ -25,12 +25,19 @@ const itemsSlice = createSlice({
   reducers: {
     itemAdded(state, action) {
       const items = state.entities
-      items.push(action.payload)
+      items.push({...action.payload, percentage: Math.round(action.payload.balances.amount / action.payload.price * 100)})
     },
     itemEdited(state, action) {
       const items = state.entities
       const index = items.findIndex((item) => item.id === action.payload.id)
-      items.splice(index, 1, action.payload)
+      items.splice(index, 1, {...action.payload, percentage: Math.round(action.payload.balances.amount / action.payload.price * 100)})
+
+      
+    },
+    itemDeleted(state, action) {
+      const items = state.entities
+      const index = items.findIndex((item) => item.id === action.payload.id)
+      items.splice(index, 1)
     }
   },
   extraReducers: {
@@ -47,5 +54,5 @@ const itemsSlice = createSlice({
   }
 })
 
-export const { itemAdded, itemEdited } = itemsSlice.actions
+export const { itemAdded, itemEdited, itemDeleted } = itemsSlice.actions
 export default itemsSlice.reducer
