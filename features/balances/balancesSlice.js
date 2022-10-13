@@ -23,6 +23,10 @@ const balancesSlice = createSlice({
     status: "idle",
   },
   reducers: {
+    balanceAdded(state, action) {
+      const balances = state.entities
+      balances.push(action.payload)
+    },
   },
   extraReducers: {
     [getBalances.pending](state) {
@@ -35,5 +39,5 @@ const balancesSlice = createSlice({
   }
 })
 
-// export const {  } = balancesSlice.actions
+export const { balanceAdded } = balancesSlice.actions
 export default balancesSlice.reducer

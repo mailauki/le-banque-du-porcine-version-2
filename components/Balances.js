@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css'
 import { supabase } from '../utils/supabaseClient';
 import { useSelector, useDispatch } from 'react-redux';
-import { getBalances } from '../features/balances/balancesSlice';
+import { getBalances, balanceAdded } from '../features/balances/balancesSlice';
 import BalanceEl from './BalanceEl';
 import BalanceForm from "./BalanceForm";
 import { IconButton } from '@mui/material';
@@ -28,6 +28,8 @@ export default function Balances({ userId }) {
     const { data, error } = await supabase
     .from('balances')
     .insert([formData])
+
+    dispatch(balanceAdded(formData))
 
     setOpen(false)
   }

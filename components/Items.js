@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css'
 import { supabase } from '../utils/supabaseClient';
 import { useSelector, useDispatch } from 'react-redux';
-import { getItems } from '../features/items/itemsSlice';
+import { getItems, itemAdded } from '../features/items/itemsSlice';
 import { getBalances } from '../features/balances/balancesSlice';
 import ItemEl from './ItemEl';
 import ItemForm from './ItemForm';
@@ -39,6 +39,8 @@ export default function Items({ userId }) {
     const { data, error } = await supabase
     .from('items')
     .insert([formData])
+
+    dispatch(itemAdded(formData))
 
     setOpen(false)
   }

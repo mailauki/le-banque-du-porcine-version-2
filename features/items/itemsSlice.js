@@ -23,6 +23,10 @@ const itemsSlice = createSlice({
     status: "idle",
   },
   reducers: {
+    itemAdded(state, action) {
+      const items = state.entities
+      items.push(action.payload)
+    },
   },
   extraReducers: {
     [getItems.pending](state) {
@@ -38,5 +42,5 @@ const itemsSlice = createSlice({
   }
 })
 
-// export const {  } = itemsSlice.actions
+export const { itemAdded } = itemsSlice.actions
 export default itemsSlice.reducer
