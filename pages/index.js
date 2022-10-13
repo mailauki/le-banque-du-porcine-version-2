@@ -19,8 +19,15 @@ export default function Home() {
   const router = useRouter()
   const currentUser = useSelector((state) => state.currentUser.entities)
   const profile = useSelector((state) => state.userProfile.entities)
+  const balances = useSelector((state) => state.balances.entities)
+  const [defaultBalance, setDefaultBalance] = useState(null)
   const dispatch = useDispatch()
-  const id = currentUser ? currentUser.id : null
+
+  useEffect(() => {
+    if(balances) {
+      setDefaultBalance(balances[0])
+    }
+  }, [balances])
 
   // useEffect(() => {
   //   dispatch(getCurrentUser())
@@ -71,7 +78,11 @@ export default function Home() {
           <div className={styles.container}>
             <div className={styles.main}>
               <Balances userId={session.user.id} />
-              <Items userId={session.user.id} />
+              {defaultBalance ? (
+                <Items userId={session.user.id} />
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </>

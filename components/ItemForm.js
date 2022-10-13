@@ -40,7 +40,7 @@ function IconContainer(props) {
   return <span {...other}>{priorityIcons[value].icon}</span>
 }
 
-export default function ItemForm({ item, onAdd, userId, defaultBalance }) {
+export default function ItemForm({ item, onAdd, onEdit, userId, defaultBalance }) {
   const [name, setName] = useState(item ? item.name : "")
   const [price, setPrice] = useState(item ? item.price : 0)
   const [priority, setPriority] = useState(item ? item.priority : 1)
@@ -51,9 +51,9 @@ export default function ItemForm({ item, onAdd, userId, defaultBalance }) {
   function handleSubmit(event) {
     event.preventDefault()
 
-    let formData = {name: name, price: parseFloat(price), priority: priority, image: image, balance_id: defaultBalance.id, user_id: userId }
+    let formData = { name: name, price: parseFloat(price), priority: priority, image: image, balance_id: defaultBalance.id, user_id: userId }
 
-    onAdd(formData)
+    item ? onEdit(formData) : onAdd(formData)
   }
 
   return (

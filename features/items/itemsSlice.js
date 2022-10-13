@@ -27,6 +27,11 @@ const itemsSlice = createSlice({
       const items = state.entities
       items.push(action.payload)
     },
+    itemEdited(state, action) {
+      const items = state.entities
+      const index = items.findIndex((item) => item.id === action.payload.id)
+      items.splice(index, 1, action.payload)
+    }
   },
   extraReducers: {
     [getItems.pending](state) {
@@ -42,5 +47,5 @@ const itemsSlice = createSlice({
   }
 })
 
-export const { itemAdded } = itemsSlice.actions
+export const { itemAdded, itemEdited } = itemsSlice.actions
 export default itemsSlice.reducer

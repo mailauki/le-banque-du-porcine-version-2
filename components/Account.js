@@ -70,7 +70,9 @@ export default function Account({ session, onLogout }) {
         updated_at: new Date(),
       }
 
-      let { error } = await supabase.from('profiles').upsert(updates)
+      let { error } = await supabase
+        .from('profiles')
+        .upsert(updates)
 
       if (error) {
         throw error
@@ -79,14 +81,8 @@ export default function Account({ session, onLogout }) {
       alert(error.message)
     } finally {
       setLoading(false)
+      router.push("/")
     }
-  }
-
-  function handleLogout() {
-    supabase.auth.signOut()
-
-    onLogout(null)
-    // router.push("/")
   }
 
   return (
