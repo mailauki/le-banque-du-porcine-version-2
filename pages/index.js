@@ -12,6 +12,8 @@ import Balances from '../components/Balances';
 import Items from '../components/Items';
 import { Fab } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { supabase } from '../utils/supabaseClient';
 import styles from '../styles/Form.module.css'
 import { TextField, Rating, InputAdornment, Button, } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -45,7 +44,6 @@ export default function ItemForm({ item, onAdd, onEdit, userId, defaultBalance }
   const [price, setPrice] = useState(item ? item.price : 0)
   const [priority, setPriority] = useState(item ? item.priority : 1)
   const [image, setImage] = useState(item ? item.image : "")
-  const [errors, setErrors] = useState([])
   const [hover, setHover] = useState(-1)
   
   function handleSubmit(event) {
@@ -60,16 +58,15 @@ export default function ItemForm({ item, onAdd, onEdit, userId, defaultBalance }
     <div style={{ width: "100%" }}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <TextField
-          id="name"
+          id="item-name"
           fullWidth
           label="Name" 
           value={name} 
           onChange={(e) => setName(e.target.value)}
           margin="normal"
-          // sx={{ margin: "16px 0 8px 0" }}
         />
         <TextField
-          id="price"
+          id="item-price"
           fullWidth
           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           label="Price" 
@@ -83,10 +80,9 @@ export default function ItemForm({ item, onAdd, onEdit, userId, defaultBalance }
             ),
           }}
           margin="normal"
-          // sx={{ margin: "16px 0 8px 0" }}
         />
         <TextField
-          id="priority"
+          id="item-priority"
           fullWidth
           disabled
           label="Priority" 
@@ -112,16 +108,14 @@ export default function ItemForm({ item, onAdd, onEdit, userId, defaultBalance }
             ),
           }}
           margin="normal"
-          // sx={{ margin: "16px 0 8px 0" }}
         />
         <TextField
-          id="image"
+          id="item-image"
           fullWidth
           label="Image Url" 
           value={image} 
           onChange={(e) => setImage(e.target.value)}
           margin="normal"
-          // sx={{ margin: "16px 0 8px 0" }}
         />
         <Button 
           variant="contained" 
@@ -129,7 +123,7 @@ export default function ItemForm({ item, onAdd, onEdit, userId, defaultBalance }
           fullWidth
           sx={{ margin: "16px 0 8px 0", padding: "12px" }}
         >
-          {!item ? "Add" : "Edit"}
+          {item ? "Edit" : "Add"}
         </Button>
       </form>
     </div>

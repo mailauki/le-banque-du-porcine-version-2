@@ -9,6 +9,8 @@ import ItemForm from './ItemForm';
 import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 export default function Items({ userId }) {
   const [open, setOpen] = useState(false)
@@ -113,6 +115,32 @@ export default function Items({ userId }) {
           </IconButton>
         )}
       </div>
+      {/* <Swiper slidesPerView="auto">
+        {items ? (
+          items.map((item) => (
+            <SwiperSlide style={{
+              padding: "1rem",
+              width: "300px",
+              mixBlendMode: "multiply",
+            }}>
+              <ItemEl 
+                key={item.id} 
+                item={item} 
+                onEdit={(editingItem) => {
+                  setEditItem(editingItem)
+                  setOpen(true)
+                }}
+                onDelete={(deletedItem) => {
+                  handleDelete(deletedItem)
+                }} 
+              />
+            </SwiperSlide>
+          ))
+        ) : (
+          <></>
+        )}
+        <SwiperSlide>NewSlide</SwiperSlide>
+      </Swiper> */}
       {!open ? (
         <div className={styles.grid}>
           {items ? (

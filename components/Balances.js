@@ -15,8 +15,6 @@ export default function Balances({ userId }) {
   const [editBalance, setEditBalance] = useState(null)
   const dispatch = useDispatch()
 
-  console.log(editBalance)
-
   useEffect(() => {
     if(userId) {
       dispatch(getBalances(userId))
