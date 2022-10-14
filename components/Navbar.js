@@ -74,7 +74,8 @@ export default function Navbar({ userId, onLogout }) {
         sx={{
           "&:hover": {
             color: "primary.main",
-          }
+          },
+          cursor: "pointer"
         }}
       >
         Le Banque Du Porcine
