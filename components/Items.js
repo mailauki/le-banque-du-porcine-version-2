@@ -14,11 +14,9 @@ export default function Items({ userId }) {
   const [open, setOpen] = useState(false)
   const items = useSelector((state) => state.items.entities)
   const [editItem, setEditItem] = useState(null)
-  // const defaultBalance = useSelector((state) => state.balances.entities[0])
   const balances = useSelector((state) => state.balances.entities)
   const [defaultBalance, setDefaultBalance] = useState(null)
   const dispatch = useDispatch()
-  console.log(items)
 
   useEffect(() => {
     if(userId) {
@@ -142,7 +140,13 @@ export default function Items({ userId }) {
             padding: "1rem",
           }}
         >
-          <ItemForm onAdd={handleAdd} userId={userId} defaultBalance={defaultBalance} item={editItem} onEdit={handleEdit} />
+          <ItemForm 
+            userId={userId} 
+            defaultBalance={defaultBalance} 
+            onAdd={handleAdd} 
+            item={editItem} 
+            onEdit={handleEdit} 
+          />
         </div>
       )}
     </div>

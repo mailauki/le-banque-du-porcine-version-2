@@ -4,17 +4,19 @@ import styles from '../styles/Form.module.css'
 import { TextField, InputAdornment, Button } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
-export default function BalanceForm({ onAdd, userId }) {
-  const [name, setName] = useState("")
-  const [amount, setAmount] = useState(0)
+export default function BalanceForm({ balance, onAdd, onEdit, userId }) {
+  const [name, setName] = useState(balance ? balance.name : "")
+  const [amount, setAmount] = useState(balance ? balance.amount : 0)
 
   function handleSubmit(event) {
     event.preventDefault()
 
-    let formData = {name: name, amount: parseFloat(amount), user_id: userId }
+    let formData = { name: name, amount: parseFloat(amount), user_id: userId }
 
-    onAdd(formData)
+    balance ? onEdit(formData) : onAdd(formData)
   }
+
+  console.log({amount})
 
   return (
     <div style={{ width: "100%" }}>
@@ -34,7 +36,8 @@ export default function BalanceForm({ onAdd, userId }) {
         <TextField
           id="amount"
           fullWidth
-          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+          // type="number"
+          // inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
           label="Amount" 
           value={amount} 
           onChange={(e) => setAmount(e.target.value)} 
@@ -53,7 +56,7 @@ export default function BalanceForm({ onAdd, userId }) {
           fullWidth
           sx={{ margin: "16px 0 8px 0", padding: "12px" }}
         >
-          Add
+          {balance ? "Edit" : "Add"}
         </Button>
       </form>
     </div>

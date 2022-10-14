@@ -27,6 +27,16 @@ const balancesSlice = createSlice({
       const balances = state.entities
       balances.push(action.payload)
     },
+    balanceEdited(state, action) {
+      const balances = state.entities
+      const index = balances.findIndex((balance) => balance.id === action.payload.id)
+      balances.splice(index, 1, action.payload)
+    },
+    balanceDeleted(state, action) {
+      const balances = state.entities
+      const index = balances.findIndex((balance) => balance.id === action.payload.id)
+      balances.splice(index, 1)
+    }
   },
   extraReducers: {
     [getBalances.pending](state) {
@@ -39,5 +49,5 @@ const balancesSlice = createSlice({
   }
 })
 
-export const { balanceAdded } = balancesSlice.actions
+export const { balanceAdded, balanceEdited, balanceDeleted } = balancesSlice.actions
 export default balancesSlice.reducer
