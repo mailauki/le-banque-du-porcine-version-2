@@ -77,12 +77,11 @@ export default function ItemEl({ item, onEdit, onDelete }) {
             }}
           >
             <ButtonGroup 
-              // size="small" 
-              // color="text.secondary"
               sx={{ 
                 display: "flex",
                 justifyContent: "center", 
-                color: "text.secondary"
+                color: "text.secondary",
+                zIndex: 2,
               }} 
             >
               <Button 
@@ -98,23 +97,6 @@ export default function ItemEl({ item, onEdit, onDelete }) {
                 Delete
               </Button>
             </ButtonGroup>
-            {/* <div style={{ margin: "auto 0" }}>
-            </div> */}
-            {/* <div
-              style={{ 
-                display: "flex", 
-                alignContent: "center", 
-                justifyContent: "center",
-                margin: "auto 0" 
-              }}
-            >
-              <IconButton onClick={() => onEdit(item)}>
-                <EditIcon />
-              </IconButton>
-              <IconButton onClick={() => onDelete(item)}>
-                <DeleteIcon />
-              </IconButton>
-            </div> */}
             <div>
               <Typography 
                 variant="subtitle1" 
@@ -142,26 +124,6 @@ export default function ItemEl({ item, onEdit, onDelete }) {
                   {priorityIcons[item.priority]}
                 </Typography>
               </div>
-              {/* <ButtonGroup 
-                // size="small" 
-                sx={{ 
-                  display: "flex",
-                  justifyContent: "center" 
-                }} 
-              >
-                <Button 
-                  startIcon={<EditIcon />} 
-                  onClick={() => onEdit(item)}
-                >
-                  Edit
-                </Button>
-                <Button  
-                  startIcon={<DeleteIcon />} 
-                  onClick={() => onDelete(item)}
-                >
-                  Delete
-                </Button>
-              </ButtonGroup> */}
             </div>
           </div>
         </SwiperSlide>

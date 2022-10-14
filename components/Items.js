@@ -115,33 +115,50 @@ export default function Items({ userId }) {
           </IconButton>
         )}
       </div>
-      {/* <Swiper slidesPerView="auto">
-        {items ? (
-          items.map((item) => (
-            <SwiperSlide style={{
-              padding: "1rem",
-              width: "300px",
-              mixBlendMode: "multiply",
-            }}>
-              <ItemEl 
-                key={item.id} 
-                item={item} 
-                onEdit={(editingItem) => {
-                  setEditItem(editingItem)
-                  setOpen(true)
+      {items ? (
+        !open ? (
+          <Swiper slidesPerView="auto" style={{ width: "100%" }}>
+            {items.map((item) => (
+              <SwiperSlide 
+                style={{
+                  padding: "1rem",
+                  width: "fit-content"
                 }}
-                onDelete={(deletedItem) => {
-                  handleDelete(deletedItem)
-                }} 
-              />
-            </SwiperSlide>
-          ))
+              >
+                <ItemEl 
+                  key={item.id} 
+                  item={item} 
+                  onEdit={(editingItem) => {
+                    setEditItem(editingItem)
+                    setOpen(true)
+                  }}
+                  onDelete={(deletedItem) => {
+                    handleDelete(deletedItem)
+                  }} 
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         ) : (
-          <></>
-        )}
-        <SwiperSlide>NewSlide</SwiperSlide>
-      </Swiper> */}
-      {!open ? (
+          <div
+            className={styles.column}
+            style={{ 
+              padding: "1rem",
+            }}
+          >
+            <ItemForm 
+              userId={userId} 
+              defaultBalance={defaultBalance} 
+              onAdd={handleAdd} 
+              item={editItem} 
+              onEdit={handleEdit} 
+            />
+          </div>
+        )
+      ) : (
+        <></>
+      )}
+      {/* {!open ? (
         <div className={styles.grid}>
           {items ? (
             items.map((item) => (
@@ -176,7 +193,7 @@ export default function Items({ userId }) {
             onEdit={handleEdit} 
           />
         </div>
-      )}
+      )} */}
     </div>
   )
 }
