@@ -10,6 +10,7 @@ import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Mousewheel } from "swiper";
 import 'swiper/css';
 
 export default function Items({ userId }) {
@@ -117,7 +118,12 @@ export default function Items({ userId }) {
       </div>
       {items ? (
         !open ? (
-          <Swiper slidesPerView="auto" style={{ width: "100%" }}>
+          <Swiper 
+            slidesPerView="auto" 
+            mousewheel={true}
+            modules={[Mousewheel]}
+            style={{ width: "100%" }}
+          >
             {items.map((item) => (
               <SwiperSlide 
                 key={item.id} 

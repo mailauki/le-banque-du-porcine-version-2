@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import styles from '../styles/Form.module.css'
-import { TextField, Rating, InputAdornment, Button, } from '@mui/material';
+import styles from '../styles/Form.module.css';
+import { useSelector } from 'react-redux';
+import { TextField, Rating, InputAdornment, Button, MenuItem } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import LooksOneIcon from '@mui/icons-material/LooksOne';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
@@ -44,12 +45,14 @@ export default function ItemForm({ item, onAdd, onEdit, userId, defaultBalance }
   const [price, setPrice] = useState(item ? item.price : 0)
   const [priority, setPriority] = useState(item ? item.priority : 1)
   const [image, setImage] = useState(item ? item.image : "")
+  const [balance, setBalance] = useState(defaultBalance)
   const [hover, setHover] = useState(-1)
+  const balances = useSelector((state) => state.balances.entities)
   
   function handleSubmit(event) {
     event.preventDefault()
 
-    let formData = { name: name, price: parseFloat(price), priority: priority, image: image, balance_id: defaultBalance.id, user_id: userId }
+    let formData = { name: name, price: parseFloat(price), priority: priority, image: image, balance_id: balance.id, user_id: userId }
 
     item ? onEdit(formData) : onAdd(formData)
   }
@@ -117,6 +120,25 @@ export default function ItemForm({ item, onAdd, onEdit, userId, defaultBalance }
           onChange={(e) => setImage(e.target.value)}
           margin="normal"
         />
+        {item ? (
+          <TextField
+            id="select-default-balance"
+            select
+            fullWidth
+            label="Select Default Balance"
+            value={balance}
+            onChange={(e) => setBalance(e.target.value)}
+            margin="normal"
+          >
+            {balances.map((option) => (
+              <MenuItem key={option.id} value={option}>
+                {option.name}
+              </MenuItem>
+            ))}
+          </TextField>
+        ) : (
+          <></>
+        )}
         <Button 
           variant="contained" 
           type="submit"
