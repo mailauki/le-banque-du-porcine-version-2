@@ -120,6 +120,7 @@ export default function Items({ userId }) {
           <Swiper slidesPerView="auto" style={{ width: "100%" }}>
             {items.map((item) => (
               <SwiperSlide 
+                key={item.id} 
                 style={{
                   padding: "1rem",
                   width: "fit-content"

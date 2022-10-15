@@ -38,9 +38,9 @@ export default function Navbar({ userId, onLogout }) {
     }
   }
 
-  function handleChange(event, newValue) {
-    setActiveTab(newValue)
-  }
+  // function handleChange(event, newValue) {
+  //   setActiveTab(newValue)
+  // }
 
   function handleLogout() {
     supabase.auth.signOut()
@@ -53,8 +53,6 @@ export default function Navbar({ userId, onLogout }) {
     <Box 
       className={`${styles.row} ${styles.navbar}`} 
       sx={{
-        // padding: "0 20px",
-        // padding: 1,
         pb: 0.5,
         pt: 0.5,
         pl: 2,

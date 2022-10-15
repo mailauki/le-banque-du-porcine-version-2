@@ -50,7 +50,9 @@ export default function ItemEl({ item, onEdit, onDelete }) {
             <div>
               <div className={styles.row}>
                 <Typography>{item.name}</Typography>
-                <Typography sx={{ color: "text.secondary" }}>
+                <Typography 
+                  color="text.secondary"
+                >
                   {item.percentage}%
                 </Typography>
               </div>
@@ -77,6 +79,7 @@ export default function ItemEl({ item, onEdit, onDelete }) {
             }}
           >
             <ButtonGroup 
+              fullWidth
               sx={{ 
                 display: "flex",
                 justifyContent: "center", 

@@ -16,14 +16,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
   const [session, setSession] = useState(null)
   const router = useRouter()
-  const currentUser = useSelector((state) => state.currentUser.entities)
-  const profile = useSelector((state) => state.userProfile.entities)
+  // const currentUser = useSelector((state) => state.currentUser.entities)
+  // const profile = useSelector((state) => state.userProfile.entities)
   const balances = useSelector((state) => state.balances.entities)
   const [defaultBalance, setDefaultBalance] = useState(null)
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   useEffect(() => {
     if(balances) {
@@ -54,8 +53,6 @@ export default function Home() {
         if (session) {
           setSession(session)
         }
-
-        setIsLoading(false)
       }
     }
 
