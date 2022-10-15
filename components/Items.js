@@ -116,55 +116,66 @@ export default function Items({ userId }) {
           </IconButton>
         )}
       </div>
-      {items ? (
-        !open ? (
-          <Swiper 
-            slidesPerView="auto" 
-            mousewheel={true}
-            modules={[Mousewheel]}
-            style={{ width: "100%" }}
-          >
-            {items.map((item) => (
-              <SwiperSlide 
-                key={item.id} 
-                style={{
-                  padding: "1rem",
-                  width: "fit-content"
-                }}
-              >
-                <ItemEl 
+      <div 
+        // className={styles.box}
+        style={{
+          // padding: "-0.5rem",
+          padding: 0,
+          // margin: "0 2rem",
+          margin:  0,
+          width: "100%",
+        }}
+      >
+        {items ? (
+          !open ? (
+            <Swiper 
+              slidesPerView="auto" 
+              mousewheel={true}
+              modules={[Mousewheel]}
+              style={{ width: "100%" }}
+            >
+              {items.map((item) => (
+                <SwiperSlide 
                   key={item.id} 
-                  item={item} 
-                  onEdit={(editingItem) => {
-                    setEditItem(editingItem)
-                    setOpen(true)
+                  style={{
+                    padding: "1rem",
+                    width: "fit-content"
                   }}
-                  onDelete={(deletedItem) => {
-                    handleDelete(deletedItem)
-                  }} 
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                >
+                  <ItemEl 
+                    key={item.id} 
+                    item={item} 
+                    onEdit={(editingItem) => {
+                      setEditItem(editingItem)
+                      setOpen(true)
+                    }}
+                    onDelete={(deletedItem) => {
+                      handleDelete(deletedItem)
+                    }} 
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div
+              className={styles.column}
+              style={{ 
+                padding: "1rem",
+              }}
+            >
+              <ItemForm 
+                userId={userId} 
+                defaultBalance={defaultBalance} 
+                onAdd={handleAdd} 
+                item={editItem} 
+                onEdit={handleEdit} 
+              />
+            </div>
+          )
         ) : (
-          <div
-            className={styles.column}
-            style={{ 
-              padding: "1rem",
-            }}
-          >
-            <ItemForm 
-              userId={userId} 
-              defaultBalance={defaultBalance} 
-              onAdd={handleAdd} 
-              item={editItem} 
-              onEdit={handleEdit} 
-            />
-          </div>
-        )
-      ) : (
-        <></>
-      )}
+          <></>
+        )}
+      </div>
       {/* {!open ? (
         <div className={styles.grid}>
           {items ? (

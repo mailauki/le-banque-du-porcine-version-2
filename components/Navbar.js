@@ -5,6 +5,7 @@ import { supabase } from '../utils/supabaseClient';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfile } from '../features/users/userProfileSlice';
 import { Typography, Box, Avatar, Button, IconButton, Tooltip } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function Navbar({ userId, onLogout }) {
   const router = useRouter()
@@ -81,6 +82,8 @@ export default function Navbar({ userId, onLogout }) {
       {route === "/profile" ? (
         <Button
           variant="outlined"
+          size="small" 
+          startIcon={<LogoutIcon />}
           onClick={handleLogout}
         >
           Logout
@@ -90,7 +93,6 @@ export default function Navbar({ userId, onLogout }) {
           <IconButton
             onClick={(event) => {
               event.preventDefault()
-      
               router.push("/profile")
             }}
             size="small"

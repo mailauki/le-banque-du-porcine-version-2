@@ -34,23 +34,45 @@ export default function Profile() {
   }, [])
 
   return (
-    <div>
-      {session ? (
-        <>
-          <Navbar userId={session.user.id} onLogout={setSession} />
-          <div className={styles.container}>
-            <div className={styles.main}>
-              <Account session={session} />
+    <div
+      style={{
+        width: "100%",
+        // width: "130vw",
+        // width: "fit-content",
+      }}
+    >
+      <div 
+        className={styles.container}
+        style={{
+          // width: "100%",
+          // width: "130vw",
+          // width: "fit-content",
+        }}
+      >
+        {session ? (
+          <>
+            <Navbar userId={session.user.id} onLogout={setSession} />
+            <div 
+              className={styles.main}
+              // className={styles.box}
+              style={{
+                padding: "1.5rem",
+              }}
+            >
+              <div 
+                className={styles.box}
+              >
+                <Account session={session} />
+              </div>
+              {/* <h1>Hello</h1> */}
             </div>
-          </div>
-        </>
-      ) : (
-        <div className={styles.container}>
+          </>
+        ) : (
           <div className={styles.main}>
             <Auth />
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
+import styles from '../styles/Home.module.css';
 import { supabase } from '../utils/supabaseClient';
 import { Button } from '@mui/material';
 
-export default function Avatar({ url, size, onUpload }) {
-  const [avatarUrl, setAvatarUrl] = useState(null)
+export default function AvatarUpload({ session, avatarUrl, onUpload }) {
+  const [avatarImage, setAvatarImage] = useState(null)
   const [uploading, setUploading] = useState(false)
-
+  
   useEffect(() => {
-    if (url) downloadImage(url)
-  }, [url])
+    if (avatarUrl) downloadImage(avatarUrl)
+  }, [avatarUrl])
 
   async function downloadImage(path) {
     try {
@@ -19,7 +20,7 @@ export default function Avatar({ url, size, onUpload }) {
         throw error
       }
       const url = URL.createObjectURL(data)
-      setAvatarUrl(url)
+      setAvatarImage(url)
     } catch (error) {
       console.log('Error downloading image: ', error.message)
     }
@@ -34,19 +35,20 @@ export default function Avatar({ url, size, onUpload }) {
       }
 
       const file = event.target.files[0]
+      // const filePath = `${session.user.id}/avatar.${file.type.split("/").pop()}`
       const fileExt = file.name.split('.').pop()
       const fileName = `${Math.random()}.${fileExt}`
-      const filePath = `${fileName}`
+      const filePath = `${session.user.id}/${fileName}`
 
       let { error: uploadError } = await supabase.storage
         .from('avatars')
-        .upload(filePath, file)
+        .upload(filePath, file, { upsert: true })
 
       if (uploadError) {
         throw uploadError
       }
+      else onUpload(filePath)
 
-      onUpload(filePath)
     } catch (error) {
       alert(error.message)
     } finally {
@@ -55,43 +57,35 @@ export default function Avatar({ url, size, onUpload }) {
   }
 
   return (
-    <div>
-      {avatarUrl ? (
+    <>
+      {avatarImage ? (
         <img
-          src={avatarUrl}
+          src={avatarImage}
           alt="Avatar"
-          className="avatar image"
-          style={{ height: size, width: size }}
+          id="avatar-image"
+          className={styles.avatar}
         />
       ) : (
         <div
-          className="avatar no-image"
-          style={{ height: size, width: size }}
+          id="avatar-no-image"
+          className={styles.avatar}
         />
       )}
-      <div style={{ width: size, textAlign: "center" }}>
-        {/* <label className="button primary block" htmlFor="avatar">
-          {uploading ? 'Uploading ...' : 'Upload'}
-        </label> */}
-        <Button
-          component="label"
-          variant="outlined"
-          htmlFor="avatar"
-        >
-          {uploading ? 'Uploading ...' : 'Upload'}
-        </Button>
-        <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
-          type="file"
-          id="avatar"
-          accept="image/*"
-          onChange={uploadAvatar}
-          disabled={uploading}
-        />
-      </div>
-    </div>
+      <Button 
+        variant="outlined" 
+        component="label" 
+        htmlFor="avatar"
+      >
+        {uploading ? 'Uploading ...' : 'Upload'}
+      </Button>
+      <input  
+        id="avatar"
+        hidden 
+        accept="image/*" 
+        type="file"
+        onChange={uploadAvatar} 
+        disabled={uploading}
+      />
+    </>
   )
 }

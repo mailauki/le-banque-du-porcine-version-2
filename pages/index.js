@@ -70,26 +70,22 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       {session ? (
         <>
           <Navbar userId={session.user.id} />
-          <div className={styles.container}>
-            <div className={styles.main}>
-              <Balances userId={session.user.id} />
-              {defaultBalance ? (
-                <Items userId={session.user.id} />
-              ) : (
-                <></>
-              )}
-            </div>
+          <div className={styles.main}>
+            <Balances userId={session.user.id} />
+            {defaultBalance ? (
+              <Items userId={session.user.id} />
+            ) : (
+              <></>
+            )}
           </div>
         </>
       ) : (
-        <div className={styles.container}>
-          <div className={styles.main}>
-            <Auth />
-          </div>
+        <div className={styles.main}>
+          <Auth />
         </div>
       )}
     </div>

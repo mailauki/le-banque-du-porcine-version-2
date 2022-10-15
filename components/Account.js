@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import styles from '../styles/Form.module.css';
 import { supabase } from '../utils/supabaseClient';
-import Avatar from './Avatar';
+import AvatarUpload from './AvatarUpload';
 import { useRouter } from 'next/router';
 import { TextField, Button } from '@mui/material';
 
-export default function Account({ session, onLogout }) {
+export default function Account({ session }) {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
   const [avatar_url, setAvatarUrl] = useState(null)
@@ -81,13 +80,19 @@ export default function Account({ session, onLogout }) {
       alert(error.message)
     } finally {
       setLoading(false)
-      router.push("/")
     }
   }
 
   return (
-    <div className={styles.form}>
-      <h1 className={styles.title}>Update Profile</h1>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center"
+      }}
+    >
+      <h1>Update Profile</h1>
       <TextField 
         id="email"
         fullWidth
@@ -104,9 +109,9 @@ export default function Account({ session, onLogout }) {
         onChange={(e) => setUsername(e.target.value)}
         margin="normal"
       />
-      <Avatar
-        url={avatar_url}
-        size={150}
+      <AvatarUpload 
+        session={session}
+        avatarUrl={avatar_url}
         onUpload={(url) => {
           setAvatarUrl(url)
           updateProfile({ username, avatar_url: url })
@@ -116,7 +121,10 @@ export default function Account({ session, onLogout }) {
         // id="update"
         variant="contained"
         fullWidth
-        onClick={() => updateProfile({ username, avatar_url })}
+        onClick={() => {
+          updateProfile({ username, avatar_url })
+          router.push("/")
+        }}
         disabled={loading}
         sx={{ margin: "16px 0 8px 0", padding: "12px" }}
       >
