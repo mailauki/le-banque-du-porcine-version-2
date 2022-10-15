@@ -1,16 +1,15 @@
-import styles from '../styles/Home.module.css'
-import { LinearProgress, IconButton, Typography, Button, ButtonGroup } from '@mui/material';
+import { useState } from 'react';
+import styles from '../styles/Home.module.css';
+import { LinearProgress, Typography, Button, ButtonGroup } from '@mui/material';
 import LooksOneIcon from '@mui/icons-material/LooksOne';
 import LooksTwoIcon from '@mui/icons-material/LooksTwo';
 import Looks3Icon from '@mui/icons-material/Looks3';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFlip } from "swiper";
-import 'swiper/css';
-import "swiper/css/effect-flip";
 
 export default function ItemEl({ item, onEdit, onDelete }) {
+  const [flip, setFlip] = useState(false)
+
   const priorityIcons = {
     1: <LooksOneIcon color="error" sx={{ fontSize: "inherit", verticalAlign: "text-top" }} />,
     2: <LooksTwoIcon color="warning" sx={{ fontSize: "inherit", verticalAlign: "text-top" }} />,
@@ -18,28 +17,13 @@ export default function ItemEl({ item, onEdit, onDelete }) {
   }
 
   return (
-    <div 
-      className={styles.card}
-      style={{ padding: 0 }}
-    >
-      <Swiper 
-        effect={"flip"}
-        loop={true}
-        modules={[EffectFlip]}
-        slidesPerView="auto"
-        onClick={(swiper) => swiper.slideNext()}
+    <div className={styles.shadow}>
+      <div 
+        className={`${styles.card} ${flip ? styles.flip : ""}`} 
+        onClick={() => setFlip(!flip)}
       >
-        <SwiperSlide>
-          <div 
-            className={styles.card} 
-            style={{ 
-              margin: 0, 
-              boxShadow: "none", 
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
-            }}
-          >
+        <div className={styles.cardInner}>
+          <div className={styles.cardFront} >
             <div style={{ margin: "auto 0" }}>
               {item.image ? (
                 <img src={item.image} alt={item.name} />
@@ -66,25 +50,13 @@ export default function ItemEl({ item, onEdit, onDelete }) {
               />
             </div>
           </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div 
-            className={styles.card} 
-            style={{ 
-              margin: 0, 
-              boxShadow: "none", 
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
-            }}
-          >
+          <div className={styles.cardBack}>
             <ButtonGroup 
               fullWidth
               sx={{ 
                 display: "flex",
                 justifyContent: "center", 
                 color: "text.secondary",
-                zIndex: 2,
               }} 
             >
               <Button 
@@ -129,8 +101,8 @@ export default function ItemEl({ item, onEdit, onDelete }) {
               </div>
             </div>
           </div>
-        </SwiperSlide>
-      </Swiper>
+        </div>
+      </div>
     </div>
   )
 }
