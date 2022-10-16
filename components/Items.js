@@ -105,7 +105,7 @@ export default function Items({ userId }) {
       <div 
         className={styles.row} 
         style={{ 
-          padding: "1rem 1.5rem 0 1.5rem" 
+          padding: "1.5rem 1.5rem 0 1.5rem" 
         }}
       >
         <h3>Items</h3>
@@ -120,11 +120,8 @@ export default function Items({ userId }) {
         )}
       </div>
       <div 
-        // className={styles.box}
         style={{
-          // padding: "-0.5rem",
           padding: 0,
-          // margin: "0 2rem",
           margin:  0,
           width: "100%",
         }}
@@ -134,6 +131,7 @@ export default function Items({ userId }) {
             <Swiper 
               slidesPerView="auto" 
               mousewheel={true}
+              loop={true}
               modules={[Mousewheel]}
               style={{ width: "100%" }}
             >

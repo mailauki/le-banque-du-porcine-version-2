@@ -80,14 +80,18 @@ export default function Navbar({ userId, onLogout }) {
         Le Banque Du Porcine
       </Typography>
       {route === "/profile" ? (
-        <Button
-          variant="outlined"
-          // size="small" 
-          startIcon={<LogoutIcon />}
-          onClick={handleLogout}
-        >
-          Logout
-        </Button>
+        <Tooltip title="Logout" arrow>
+          <IconButton onClick={handleLogout} size="small">
+            <Avatar 
+              sx={{ 
+                bgcolor: "transparent", 
+                color: "primary.main" 
+              }}
+            >
+              <LogoutIcon />
+            </Avatar>
+          </IconButton>
+        </Tooltip>
       ) : (
         <Tooltip title="Account settings" arrow>
           <IconButton

@@ -10,9 +10,8 @@ import Auth from '../components/Auth';
 import FeaturedItem from '../components/FeaturedItem';
 import Balances from '../components/Balances';
 import Items from '../components/Items';
-import { Fab } from '@mui/material';
-import LoginIcon from '@mui/icons-material/Login';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Mousewheel } from "swiper";
 import 'swiper/css';
 
 export default function Home() {
@@ -23,6 +22,8 @@ export default function Home() {
   const balances = useSelector((state) => state.balances.entities)
   const [defaultBalance, setDefaultBalance] = useState(null)
   // const dispatch = useDispatch()
+  const defaultSlide = 1
+
 
   useEffect(() => {
     if(balances) {
@@ -65,7 +66,6 @@ export default function Home() {
 
   function handleClick(event) {
     event.preventDefault()
-
     router.push("/profile")
   }
 
@@ -75,14 +75,33 @@ export default function Home() {
         <>
           <Navbar userId={session.user.id} />
           <div className={styles.main}>
-            {defaultBalance ? (
-              <FeaturedItem userId={session.user.id} />
-            ) : (
-              <></>
-            )}
-            <Balances userId={session.user.id} />
-            {defaultBalance ? (
-              <Items userId={session.user.id} />
+            {defaultSlide ? (
+              <Swiper
+                slidesPerView={1}
+                direction={"vertical"}
+                mousewheel={true}
+                modules={[Mousewheel]}
+                initialSlide={defaultSlide}
+                style={{ height: "calc(100vh - 8rem)" }}
+              >
+                <SwiperSlide>
+                  {defaultBalance ? (
+                    <FeaturedItem userId={session.user.id} />
+                  ) : (
+                    <></>
+                  )}
+                </SwiperSlide>
+                <SwiperSlide>
+                  <Balances userId={session.user.id} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  {defaultBalance ? (
+                    <Items userId={session.user.id} />
+                  ) : (
+                    <></>
+                  )}
+                </SwiperSlide>
+              </Swiper>
             ) : (
               <></>
             )}

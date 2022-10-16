@@ -90,7 +90,7 @@ export default function Balances({ userId }) {
     <div
       className={styles.column}
       style={{ 
-        padding: "1rem",
+        padding: "1.5rem",
       }}
     >
       <div className={styles.box}>

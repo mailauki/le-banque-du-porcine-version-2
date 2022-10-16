@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFeaturedItem } from '../features/items/featuredItemSlice';
@@ -10,7 +10,6 @@ import Looks3Icon from '@mui/icons-material/Looks3';
 export default function FeaturedItem({ userId }) {
   const featuredItem = useSelector((state) => state.featuredItem.entities)
   const dispatch = useDispatch()
-  console.log(featuredItem)
 
   const priorityIcons = {
     1: <LooksOneIcon color="error" sx={{ fontSize: "inherit", verticalAlign: "text-top" }} />,
@@ -25,68 +24,74 @@ export default function FeaturedItem({ userId }) {
   }, [userId])
 
   return (
-    <div 
-      className={styles.box}
-      style={{ margin: "1rem", width: "calc(100% - 2rem)" }}
-    >
-      <div style={{ margin: "auto 0" }}>
-        {featuredItem.image ? (
-          <img 
-            src={featuredItem.image} 
-            alt={featuredItem.name} 
-            style={{ margin: "20px 0" }}
-          />
-        ) : (
-          <></>
-        )}
-      </div>
-      <div>
-        <Typography 
-          variant="subtitle1" 
-          color="text.secondary"
-        >
-          {featuredItem.name}
-        </Typography>
+    <>
+      {featuredItem ? (
         <div 
-          style={{ 
-            display: "flex", 
-            alignContent: "center", 
-            justifyContent: "space-between" 
-          }}
+          className={styles.box}
+          style={{ margin: "1.5rem 1rem", width: "calc(100% - 2rem)" }}
         >
-          <Typography variant="h5">
-            ${featuredItem.price.toFixed(2)}
-          </Typography>
-          <div 
-            className={styles.row}
-            style={{ justifyContent: "end" }}
-          >
+          <div style={{ margin: "auto 0" }}>
+            {featuredItem.image ? (
+              <img 
+                src={featuredItem.image} 
+                alt={featuredItem.name} 
+                style={{ margin: "20px 0" }}
+              />
+            ) : (
+              <></>
+            )}
+          </div>
+          <div>
             <Typography 
-              variant="h5" 
-              sx={{ 
-                ml: 1, 
-                mr: 1,
-                filter: "opacity(0.7)" 
-              }}
-            >
-              {priorityIcons[featuredItem.priority]}
-            </Typography>
-            <Typography 
+              variant="subtitle1" 
               color="text.secondary"
             >
-              {featuredItem.percentage}%
+              {featuredItem.name}
             </Typography>
+            <div 
+              style={{ 
+                display: "flex", 
+                alignContent: "center", 
+                justifyContent: "space-between" 
+              }}
+            >
+              <Typography variant="h5">
+                ${featuredItem.price.toFixed(2)}
+              </Typography>
+              <div 
+                className={styles.row}
+                style={{ justifyContent: "end" }}
+              >
+                <Typography 
+                  variant="h5" 
+                  sx={{ 
+                    ml: 1, 
+                    mr: 1,
+                    filter: "opacity(0.7)" 
+                  }}
+                >
+                  {priorityIcons[featuredItem.priority]}
+                </Typography>
+                <Typography 
+                  color="text.secondary"
+                >
+                  {featuredItem.percentage}%
+                </Typography>
+              </div>
+            </div>
           </div>
+          <LinearProgress 
+            variant="determinate" 
+            value={featuredItem.percentage} 
+            sx={{ 
+              borderRadius: "4px", 
+              height: "12px",
+            }} 
+          />
         </div>
-      </div>
-      <LinearProgress 
-        variant="determinate" 
-        value={featuredItem.percentage} 
-        sx={{ 
-          borderRadius: "4px", 
-          height: "12px",
-        }} 
-      />
-    </div>
+      ) : (
+        <></>
+      )}
+    </>
   )
 }
