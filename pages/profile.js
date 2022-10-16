@@ -68,7 +68,12 @@ export default function Profile() {
             </div>
           </>
         ) : (
-          <div className={styles.main}>
+          <div 
+            className={styles.main}
+            style={{
+              padding: "1.5rem",
+            }}
+          >
             <Auth />
           </div>
         )}

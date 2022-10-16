@@ -82,7 +82,7 @@ export default function Navbar({ userId, onLogout }) {
       {route === "/profile" ? (
         <Button
           variant="outlined"
-          size="small" 
+          // size="small" 
           startIcon={<LogoutIcon />}
           onClick={handleLogout}
         >

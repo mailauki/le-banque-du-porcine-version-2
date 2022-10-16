@@ -17,7 +17,7 @@ export default function ItemEl({ item, onEdit, onDelete }) {
   }
 
   return (
-    <div className={styles.shadow}>
+    <div className={styles.cardShadow}>
       <div 
         className={`${styles.card} ${flip ? styles.flip : ""}`} 
         onClick={() => setFlip(!flip)}

@@ -98,11 +98,14 @@ export default function Items({ userId }) {
   }
 
   return (
-    <div className={styles.column}>
+    <div 
+      className={`${styles.column} ${styles.shadow}`}
+      style={{ margin: "1rem", width: "calc(100% - 2rem)" }}
+    >
       <div 
         className={styles.row} 
         style={{ 
-          padding: "1rem" 
+          padding: "1rem 1.5rem 0 1.5rem" 
         }}
       >
         <h3>Items</h3>

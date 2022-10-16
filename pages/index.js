@@ -7,7 +7,7 @@ import { getCurrentUser } from '../features/users/currentUserSlice';
 import { getProfile } from '../features/users/userProfileSlice';
 import Navbar from '../components/Navbar';
 import Auth from '../components/Auth';
-import Account from '../components/Account';
+import FeaturedItem from '../components/FeaturedItem';
 import Balances from '../components/Balances';
 import Items from '../components/Items';
 import { Fab } from '@mui/material';
@@ -75,6 +75,11 @@ export default function Home() {
         <>
           <Navbar userId={session.user.id} />
           <div className={styles.main}>
+            {defaultBalance ? (
+              <FeaturedItem userId={session.user.id} />
+            ) : (
+              <></>
+            )}
             <Balances userId={session.user.id} />
             {defaultBalance ? (
               <Items userId={session.user.id} />
@@ -84,9 +89,14 @@ export default function Home() {
           </div>
         </>
       ) : (
-        <div className={styles.main}>
-          <Auth />
-        </div>
+        <div 
+            className={styles.main}
+            style={{
+              padding: "1.5rem",
+            }}
+          >
+            <Auth />
+          </div>
       )}
     </div>
   )
