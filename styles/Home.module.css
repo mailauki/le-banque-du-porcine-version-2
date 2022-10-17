@@ -1,8 +1,5 @@
 .container {
-  /* width: 100vw; */
   min-height: 100vh;
-  /* padding: 0 2rem; */
-  /* margin: 4rem 0; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +9,6 @@
   width: 100%;
   max-width: 800px;
   margin: 2rem auto;
-  /* padding: 0 0.5rem; */
 }
 
 .navbar {
@@ -51,7 +47,6 @@
 .box {
   width: 100%;
   border-radius: 20px;
-  /* margin: 1rem; */
   padding: 1.5rem;
   background: #e0e0e0;
   box-shadow:  10px 10px 20px #b3b3b3,
@@ -66,20 +61,14 @@
 }
 
 .shadow {
-  /* background: linear-gradient(200deg, #cacaca, #f0f0f0); */
-  /* box-shadow:  10px 10px 20px #b3b3b3,
-              -10px -10px 20px #ffffff; */
   box-shadow: inset 6px 6px 10px #b3b3b3,
               inset -6px -6px 10px #fff;
   border-radius: 20px;
-  /* margin: 1rem; */
 }
 
 .cardShadow {
   box-shadow:  10px 10px 20px #b3b3b3,
               -10px -10px 20px #ffffff;
-  /* box-shadow: 6px 6px 16px 0 rgba(209,205,199,0.5),
-              -6px -6px 16px 0 rgba(255,255,255,0.5); */
   margin: 1rem 0.5rem;
   text-align: left;
   border-radius: 10px;

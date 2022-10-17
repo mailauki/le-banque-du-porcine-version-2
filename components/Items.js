@@ -177,42 +177,6 @@ export default function Items({ userId }) {
           <></>
         )}
       </div>
-      {/* {!open ? (
-        <div className={styles.grid}>
-          {items ? (
-            items.map((item) => (
-              <ItemEl 
-                key={item.id} 
-                item={item} 
-                onEdit={(editingItem) => {
-                  setEditItem(editingItem)
-                  setOpen(true)
-                }}
-                onDelete={(deletedItem) => {
-                  handleDelete(deletedItem)
-                }} 
-              />
-            ))
-          ) : (
-            <></>
-          )}
-        </div>
-      ) : (
-        <div
-          className={styles.column}
-          style={{ 
-            padding: "1rem",
-          }}
-        >
-          <ItemForm 
-            userId={userId} 
-            defaultBalance={defaultBalance} 
-            onAdd={handleAdd} 
-            item={editItem} 
-            onEdit={handleEdit} 
-          />
-        </div>
-      )} */}
     </div>
   )
 }

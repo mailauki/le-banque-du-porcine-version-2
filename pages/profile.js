@@ -6,7 +6,6 @@ import Auth from '../components/Auth';
 import Account from '../components/Account';
 
 export default function Profile() {
-  const [isLoading, setIsLoading] = useState(true)
   const [session, setSession] = useState(null)
 
   useEffect(() => {
@@ -21,8 +20,6 @@ export default function Profile() {
         if (session) {
           setSession(session)
         }
-
-        setIsLoading(false)
       }
     }
 
@@ -37,24 +34,16 @@ export default function Profile() {
     <div
       style={{
         width: "100%",
-        // width: "130vw",
-        // width: "fit-content",
       }}
     >
       <div 
         className={styles.container}
-        style={{
-          // width: "100%",
-          // width: "130vw",
-          // width: "fit-content",
-        }}
       >
         {session ? (
           <>
             <Navbar userId={session.user.id} onLogout={setSession} />
             <div 
               className={styles.main}
-              // className={styles.box}
               style={{
                 padding: "1.5rem",
               }}
@@ -64,7 +53,6 @@ export default function Profile() {
               >
                 <Account session={session} />
               </div>
-              {/* <h1>Hello</h1> */}
             </div>
           </>
         ) : (

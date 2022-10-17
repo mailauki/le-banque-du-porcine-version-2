@@ -10,8 +10,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 export default function Navbar({ userId, onLogout }) {
   const router = useRouter()
   const { route } = router
-  // const [activeTab, setActiveTab] = useState(route) 
-  // const links = [{href: "/", name: "Home"}, {href: "/profile", name: "Profile"}]
   const [avatarUrl, setAvatarUrl] = useState(null)
   const profile = useSelector((state) => state.userProfile.entities)
   const dispatch = useDispatch()
@@ -38,10 +36,6 @@ export default function Navbar({ userId, onLogout }) {
       console.log('Error downloading image: ', error.message)
     }
   }
-
-  // function handleChange(event, newValue) {
-  //   setActiveTab(newValue)
-  // }
 
   function handleLogout() {
     supabase.auth.signOut()
